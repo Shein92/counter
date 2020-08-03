@@ -1,0 +1,79 @@
+.wrapper {
+    display: block;
+    width: 250px;
+    height: 160px;
+    border: 2px solid rgb(67, 185, 218);
+    border-radius: 5px;
+}
+
+.outputWrapper {
+    margin-top: 5px;
+}
+
+.output {
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    margin: 0 auto;
+    background-color: rgb(67, 185, 218);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.inputTop {
+    margin-top: 30px;
+}
+
+.redNumber {
+    color: rgb(137, 42, 42);
+    font-size: 60px;
+}
+
+.regularNumber {
+    color: rgb(23, 126, 23);
+    font-size: 60px;
+}
+
+.btnWrapper {
+    text-align: center;
+}
+
+.enterMessage {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 700;
+}
+
+.incorrectValue {
+    display: block;
+    text-align: center;
+    margin-top: 25px;
+    font-weight: 700;
+    color: darkred
+}
+
+.mainStyleBtn {
+    width: 90px;
+    height: 30px;
+    background-color: rgb(67, 185, 218);
+    /* margin-left: 5px; */
+    margin-top: 10px;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    font-size: 20px;
+}
+
+.btnInactive {
+    width: 90px;
+    height: 30px;
+    background-color: grey;
+    margin-left: 5px;
+    margin-top: 10px; 
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: 20px;
+}
