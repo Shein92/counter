@@ -13,7 +13,7 @@ type CounterPropsType = {
 	error: boolean
 }
 
-function Counter(props: CounterPropsType) {
+function Counter1(props: CounterPropsType) {
 
 	let mainStyle = {
 		width: '90px',
@@ -64,5 +64,6 @@ function Counter(props: CounterPropsType) {
 		</div>
     )
 }
+const Counter = React.memo(Counter1);
 
 export default Counter;

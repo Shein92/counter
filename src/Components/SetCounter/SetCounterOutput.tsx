@@ -10,7 +10,7 @@ type SetCounterOutputPropsType = {
 	error: boolean
 }
 
-function SetCounterOutput(props: SetCounterOutputPropsType) {
+function SetCounterOutput1(props: SetCounterOutputPropsType) {
 
 	const onMinChange = (event: ChangeEvent<HTMLInputElement>) => {
 		props.minNumberChange(+event.currentTarget.value);
@@ -37,9 +37,14 @@ function SetCounterOutput(props: SetCounterOutputPropsType) {
 						style={props.error ? { width: '50px', textAlign: "center", fontSize: "16px", backgroundColor: 'red'  } : { width: '50px', textAlign: "center", fontSize: "16px"}}
 					/>
 				</div>
+				{/* <MinValue value={props.minNum} 
+					onChange={onMinChange} 
+					style={props.error ? { width: '50px', textAlign: "center", fontSize: "16px", backgroundColor: 'red'  } : { width: '50px', textAlign: "center", fontSize: "16px"}}/> */}
 			</div>
 		</div>
 	)
 }
+
+const SetCounterOutput = React.memo(SetCounterOutput1);
 
 export default SetCounterOutput;

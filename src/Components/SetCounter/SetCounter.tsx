@@ -15,7 +15,7 @@ type SetCounterPropsType = {
 	setNewMinNumber: (num: number) => void
 }
 
-function SetCounter(props: SetCounterPropsType) {
+function SetCounter1(props: SetCounterPropsType) {
 
 	let mainStyle = {
 		width: '90px',
@@ -39,14 +39,16 @@ function SetCounter(props: SetCounterPropsType) {
 		fontSize: '20px'
 	}
 
-	function minNumberChange(num:number) {
+	function minNumberChange(num: number) {
 		props.setNewMinNumber(num);
+		props.setErrorChange(props.maxNumber <= num || num < 0);
 	}
-	function maxNumberChange(num:number) {
+	function maxNumberChange(num: number) {
 		props.setNewMaxNumber(num);
+		props.setErrorChange(num <= props.minNumber || num < 0);
 	}
 
-	function onClickChangeMinMaxValues () {
+	function onClickChangeMinMaxValues() {
 		props.setNewChangeMode(false);
 		saveState('min', props.minNumber);
 		saveState('max', props.maxNumber);
@@ -54,7 +56,7 @@ function SetCounter(props: SetCounterPropsType) {
 
 	return (
 		<div className={styles.wrapper}>
-			<SetCounterOutput 
+			<SetCounterOutput
 				minNum={props.minNumber}
 				maxNum={props.maxNumber}
 				minNumberChange={minNumberChange}
@@ -72,5 +74,7 @@ function SetCounter(props: SetCounterPropsType) {
 		</div>
 	)
 }
+
+const SetCounter = React.memo(SetCounter1)
 
 export default SetCounter;

@@ -8,7 +8,7 @@ type CounterOutputPropsType = {
 	error: boolean
 }
 
-function CounterOutput(props: CounterOutputPropsType) {
+function CounterOutput1(props: CounterOutputPropsType) {
 	return (
 		<div className={style.outputWrapper}>
 			<div className={style.output}>
@@ -20,6 +20,8 @@ function CounterOutput(props: CounterOutputPropsType) {
 		</div>
 	)
 }
+
+const CounterOutput = React.memo(CounterOutput1)
 
 export default CounterOutput;
 

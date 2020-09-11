@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import Counter from './Components/Counter/Counter';
 import SetCounter from './Components/SetCounter/SetCounter';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppRootStateType } from './state/store';
+import { InitialStateType, resetNumberAC, setNewMinNumberAC, setNewMaxNumberAC, setChangeModeAC, setErrorAC, incrementNumberAC } from './state/counter-reducer';
 
 export function saveState<T>(key: string, state: T) {
 	const stateAsString = JSON.stringify(state);
@@ -10,85 +13,63 @@ export function saveState<T>(key: string, state: T) {
 
 export function restoreState<T>(key: string, defaultState: T) {
 	const stateAsString = localStorage.getItem(key);
-	if (stateAsString !== null)  defaultState = JSON.parse(stateAsString); 
+	if (stateAsString !== null) defaultState = JSON.parse(stateAsString);
 	return defaultState;
 }
 
 function App() {
+	const counter = useSelector<AppRootStateType, InitialStateType>(state => state.counter);
+	const dispatch = useDispatch();
 
-	let [number, setNumber] = useState<number>(0);
-	let [minNumber, setMinNumber] = useState<number>(() => {
-		const savedMinNum = localStorage.getItem('min');
-		return savedMinNum !== null ? JSON.parse(savedMinNum) : 0
-	});
-	let [maxNumber, setMaxNumber] = useState<number>(() => {
-		const savedMaxNum = localStorage.getItem('max');
-		return savedMaxNum !== null ? JSON.parse(savedMaxNum) : 5;
-	});
-	let [changeMode, setChangeMode] = useState<boolean>(false);
-	let [error, setError] = useState<boolean>(false);
-
-	if(minNumber < 0) setMinNumber(0);
-	if(maxNumber < 0) setMaxNumber(0);
-	if (minNumber >= maxNumber && error === false) {
-		setError(true);
-		console.log('13');
-	}
-	if (minNumber < maxNumber && error === true) setError(false);
-	if (maxNumber  < 0 && error === false) {
-		setError(true);
-		console.log('skldf')
-	}
-	if (minNumber < 0  && error === false) {
-		setError(true)
-		console.log('henlo')
-		console.log(error);
-	}
-
-	function incrementNumber () {
-		setNumber(++number);
+	function incrementNumber() {
+		let action = incrementNumberAC();
+		dispatch(action);
 	}
 
 	function resetNumber() {
-		setNumber(minNumber);
+		let action = resetNumberAC();
+		dispatch(action);
 	}
 
 	function setNewMinNumber(num: number) {
-		setMinNumber(num);
-		setNumber(num);
+		let action = setNewMinNumberAC(num);
+		dispatch(action);
 	}
 
-	function setNewMaxNumber(num: number){
-		setMaxNumber(num);
+	function setNewMaxNumber(num: number) {
+		let action = setNewMaxNumberAC(num);
+		dispatch(action);
 	}
 
 	function setNewChangeMode(bool: boolean) {
-		setChangeMode(bool);
+		let action = setChangeModeAC(bool);
+		dispatch(action);
 	}
 
 	function setErrorChange(bool: boolean) {
-		setError(bool)
+		let action = setErrorAC(bool);
+		dispatch(action);
 	}
 
 	return (
 		<div className="App">
-			<SetCounter 
-				minNumber={minNumber}
-				maxNumber={maxNumber}
+			<SetCounter
+				minNumber={counter.minNumber}
+				maxNumber={counter.maxNumber}
 				setNewChangeMode={setNewChangeMode}
-				error={error}
-				changeMode={changeMode}
+				error={counter.error}
+				changeMode={counter.changeMode}
 				setErrorChange={setErrorChange}
 				setNewMinNumber={setNewMinNumber}
 				setNewMaxNumber={setNewMaxNumber}
 			/>
-			<Counter number={number}
-				minNumber={minNumber}
-				maxNumber={maxNumber}
+			<Counter number={counter.number}
+				minNumber={counter.minNumber}
+				maxNumber={counter.maxNumber}
 				incrementNumber={incrementNumber}
 				resetNumber={resetNumber}
-				changeMode={changeMode}
-				error={error}
+				changeMode={counter.changeMode}
+				error={counter.error}
 			/>
 		</div>
 	);
